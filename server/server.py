@@ -136,3 +136,48 @@ How to Apply: To Head, NSTEDB.
     chain = load_qa_chain(model, chain_type="stuff", prompt=prompt)
 
     return chain
+
+
+def handle_userinput(user_question):
+    embeddings = OpenAIEmbeddings()
+
+    new_db = FAISS.load_local(
+        "faiss_index", embeddings, allow_dangerous_deserialization=True)
+
+    docs = new_db.similarity_search(user_question)
+
+    chain = get_conversational_chain()
+    response = chain(
+        {"input_documents": docs, "question": user_question}, return_only_outputs=True)
+
+    return response["output_text"]
+
+
+pdf_file = None
+
+
+@app.route('/upload', methods=['POST'])
+def upload_file():
+    global pdf_file
+    if 'file' not in request.files:
+        return 'No file part', 400
+    file = request.files['file']
+    if file.filename == '':
+        return 'No selected file', 400
+    if file and file.content_type == 'application/pdf':
+        pdf_file = file.read()  # Reading the file and storing it in a variable
+        return pdf_file
+    else:
+        return 'Invalid file type', 400
+
+
+@app.route('/sort_words', methods=['POST'])
+def main():
+    load_dotenv()
+    text = request.json.get('text')
+    user_question = handle_userinput(text)
+    return jsonify({'original_text': text, 'sorted_text': user_question})
+
+
+if __name__ == '_main_':
+    app.run(debug=True)
