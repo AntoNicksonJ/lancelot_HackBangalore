@@ -1,0 +1,47 @@
+.bo2{
+    width: 100%;
+    min-height:100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.naan{
+    display: flex;
+    width: 700px;
+    height: 400px;
+    
+}
+
+.bo2 .naan ul{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.bo2 .naan ul li{
+    background-color: white;
+    height: 30px;
+    padding: 10px;
+    list-style: none;
+    border-radius: 10px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+
+.bo2 .naan ul li a{
+    text-decoration: none;
+    text-align: center;
+    
+}
+
+
+.bo2 .naan ul li:hover{
+    background-color: rgba(0, 255, 255, 0.796);
+}
+
+.bo2 .naan ul li:focus{
+    background-color: rgba(0, 255, 255, 0.796);
+}
