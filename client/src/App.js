@@ -28,7 +28,7 @@ function App() {
     <div className='App'>
   <Router>
   <Routes>
-    
+
   <Route path="/" element={
   <React.Fragment>
     <NavigationBar/>
@@ -47,9 +47,43 @@ function App() {
 
 } />
 
+<Route path="/detail2" element={
+  <React.Fragment>
+    <NavigationBar/>
+    <Nav/>
+    <User/>
+    </React.Fragment>
+} />
+
+<Route path="/detail3" element={
+  <React.Fragment>
+    <NavigationBar/>
+    <Nav/>
+    <Address/>
+    </React.Fragment>
+} />
+
+<Route path="/detail4" element={
+  <React.Fragment>
+    <NavigationBar/>
+    <Nav/>
+    <Income/>
+    </React.Fragment>
+} />
+
+<Route path="/detail5" element={
+  <React.Fragment>
+    <NavigationBar/>
+    <Nav/>
+    <Pdf/>
+    </React.Fragment>
+
+} />
+
   </Routes>
   </Router>
     </div>
   );
 } 
 export default App;
+
