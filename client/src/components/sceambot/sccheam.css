@@ -1,0 +1,105 @@
+.bo{
+    margin: 0;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.b
+{
+    padding: 12vw;
+    width: 80%;
+}
+
+.b h1{
+    color: #fff;
+    font-size: 40px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+form p{
+    color: #fff;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+form label{
+    width: 100%;
+}
+
+form label textarea{
+    width: 100%;
+    border-radius: 4px;
+    
+}
+
+form button{
+    width: 135px;
+    border-radius: 2px;
+    margin-top: 10px;
+    outline: none;
+    border: none;
+    height: 30px;
+    cursor: pointer;
+    word-spacing: 5px;
+    letter-spacing: 2px;
+    transition: 0.5s;
+}
+
+form button:hover{
+    background-color: rgb(244, 67, 27);
+    color: black;
+}
+
+
+.search{
+    padding-top: 14px;
+    padding-left: 10px;
+    padding-right: 10px;
+    line-height: 18px;
+    letter-spacing: 1.2px;
+    
+}
+
+.use{
+    margin-top: 50px;
+    width: 98.3%;
+    background-color: #fff;
+    color: hsl(0, 0%, 0%);
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.use p{
+    color: #000; 
+}
+
+.output{
+    width: 101.7%;
+    background-color: #fff;
+    color: #000;
+    border-radius: 4px;
+}
+
+.output p{
+    color: black;
+    padding: 20px;
+}
+
+.Hed{
+    color: #000;
+    font-weight: 800;
+    font-size: 25px;
+}
+
+.Hed2{
+    margin-bottom: -25px;
+}
