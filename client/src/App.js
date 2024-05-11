@@ -3,7 +3,7 @@ import './App.css';
 import NavigationBar from './components/Nav/NavigationBar';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Welcome from './components/Welcome/Welcome';
-
+import AboutSection from './components/About/AboutSection';
 function App() {
 
 
@@ -15,6 +15,7 @@ function App() {
   <React.Fragment>
     <NavigationBar/>
     <Welcome/>
+    <AboutSection/>
   </React.Fragment>
 
 } />
