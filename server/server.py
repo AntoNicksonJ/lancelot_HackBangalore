@@ -178,7 +178,7 @@ def gpt4(i):
     url = "https://api.openai.com/v1/chat/completions"
     headers = {
         "Content-Type": "application/json",
-        "Authorization": "Bearer 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"
+        "Authorization": "Bearer "
     }
 
     user_prompt = (i)
