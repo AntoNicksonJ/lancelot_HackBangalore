@@ -171,6 +171,91 @@ def upload_file():
         return 'Invalid file type', 400
 
 
+def gpt4(i):
+    import requests
+    import json
+
+    url = "https://api.openai.com/v1/chat/completions"
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer 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"
+    }
+
+    user_prompt = (i)
+    data = {
+        "model": "gpt-4-turbo-2024-04-09",
+        "messages": [{"role": "user", "content": user_prompt}],
+        "temperature": 0.7
+    }
+
+    response = requests.post(url, headers=headers, data=json.dumps(data))
+    json_string = response.text
+    dataa = json.loads(json_string)
+    d = dataa["choices"][0]["message"]["content"]
+    return d
+
+
+@app.route('/gpt4', methods=['POST'])
+def run_gpt4():
+    if request.method == 'POST':
+        input_text = upload_file()
+        response = gpt4(f"""A proper Business Proposal Template should contain all the below Attributes with their mentioned objects, but then while human giving their proposal it is not necessary to contain all aspects due to human error.
+
+    1. Cover Page and Table of Contents
+    2. Executive Summary - The executive summary shouldn’t include a great deal of financial information. If you have a particularly relevant or striking financial result
+    3. Company Description - The company description should include a mission statement, the company principles, any strategic partners, and your corporate structure.
+    4. Market Analysis Many business owners engage third-party companies to perform an analysis. If you have, be sure to cite them. If your information comes from published research or a survey, be sure to cite those as well.
+    5. Organization and Management - The organization and management section should itemize your company’s management structure. Many business plans provide an organizational chart, a structure description, and salary forecasts.
+    6. Service or Product - The service or product section should also include your product/service’s estimated lifecycle, and any research and development completed, in progress, or planned. Naturally, this section will vary greatly depending on your type of business. It should also include a description of any trademarks, patents, or other intellectual property rights, if applicable.
+    7. Marketing and Sales - The marketing and sales section includes three vital pieces of information:
+    8. Financial Analysis - The financial projections must include
+    9. Funding Request - Here’s one way you can structure your funding request:
+        
+    10. Appendix - Appropriate appendix materials include
+
+    So as a result , if the input fails to satisfy all the above aspects then mention those particular aspects back asking the fill them.
+
+    Output is the missing aspects from the Proposal.
+
+    The above mentioned title are the basics for a Business Proposal. Now user give you his report you have to check whether it have satisfied all the above mentioned aspects
+
+    the user input is {input_text}
+    """)
+
+    return jsonify({'response': response}), 200
+
+
+@app.route('/api/save-data', methods=['POST'])
+def save_data():
+    data = request.json
+    input_value = data.get('inputValue')
+    # Now you can use 'input_value' variable to store the input data or process it further
+    # print("Received input value:", input_value)
+    return input_value
+
+
+@app.route('/send-email', methods=['POST'])
+def send_email():
+    email = "22d148@psgitech.ac.in"
+    receive = "snehandot@gmail.com"
+    subject = "PROS CONES AND OTHER DETAILS FOR "  # Predefined subject
+    message = save_data()  # Predefined message
+
+    text = f"Subject: {subject}\n\n{message}"
+
+    try:
+        server = smtplib.SMTP("smtp.gmail.com", 587)
+        server.starttls()
+        server.login(email, "uemtqrayscmszceu")
+        server.sendmail(email, receive, text)
+        server.quit()
+
+        return 'Email sent successfully', 200
+    except Exception as e:
+        print("Error:", e)
+        return 'Failed to send email', 500
+
+
 @app.route('/sort_words', methods=['POST'])
 def main():
     load_dotenv()
