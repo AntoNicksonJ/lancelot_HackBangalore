@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import NavigationBar from './components/Nav/NavigationBar';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
+import Welcome from './components/Welcome/Welcome';
 
 function App() {
 
@@ -14,6 +14,15 @@ function App() {
   <Route path="/" element={
   <React.Fragment>
     <NavigationBar/>
+    <Welcome/>
+  </React.Fragment>
+
+} />
+
+<Route path="/home" element={
+  <React.Fragment>
+    <NavigationBar/>
+    
   </React.Fragment>
 
 } />
