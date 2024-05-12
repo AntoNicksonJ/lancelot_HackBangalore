@@ -8,6 +8,7 @@ function App() {
   
 
   return (
+    
     <div className='bo3'>
       <form className='nsd'>
         <h2>Proof of identity</h2>
