@@ -24,12 +24,12 @@ const NavigationBar = () => {
     <>
       <nav className="navBar">
         <div className="leftSection">
-          <a href='https://github.com/KennethOnuorah/Website' target={'_blank'} style={{textDecoration: "none", outline: "none"}}>
+          
             <div className='companyLogo'>
               {/* <img src=''/> */}
-              <h1>Apply</h1>
+              <h1>Finacle</h1>
             </div>
-          </a>
+        
             <div className="navBtns">
           
             <a href="#"><Link to="/">Home</Link></a>            
@@ -37,12 +37,12 @@ const NavigationBar = () => {
 
 
               <div className="navDropdown">
-              <a href="#"><Link to="/home">Scheam</Link></a> 
+              <a href="#"><Link to="/home">Scheme</Link></a> 
                 {/* <div className="aboutDropdownMenu">
                 </div> */}
               </div>
               <div className="navDropdown">
-              <a href="#"><Link to="/detail">Project</Link></a> 
+              <a href="#"><Link to="/detail">Proposal</Link></a> 
                 {/* <div className="serviceDropdownMenu">
                  
                 </div> */}

@@ -315,3 +315,24 @@ hr {
       display: none;
     }
   }
+  @media only screen and (max-width: 685px) {
+    .sideMenuSiteSections {
+      margin-top: 10px;
+      gap: 2rem;
+    }
+    .sideMenuAccountBtns {
+      gap: 1rem;
+    }
+    .sideMenu {
+      bottom: 2.5%;
+      width: 92%;
+      gap: 1rem;
+    }
+    .navBar {
+      padding-left: 15px;
+      padding-right: 20px;
+    }
+    .accountSection {
+      display: none;
+    }
+  }/*# sourceMappingURL=NavigationBar.css.map */
