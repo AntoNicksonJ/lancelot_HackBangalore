@@ -9,9 +9,9 @@ from langchain.chains.question_answering import load_qa_chain
 import openai
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import smtplib
 
-
-app = Flask(__name__)
+app = Flask(_name_)
 
 
 CORS(app)
@@ -152,23 +152,15 @@ def handle_userinput(user_question):
 
     return response["output_text"]
 
+# pdf_file = None
 
-pdf_file = None
 
-
-@app.route('/upload', methods=['POST'])
-def upload_file():
-    global pdf_file
-    if 'file' not in request.files:
-        return 'No file part', 400
-    file = request.files['file']
-    if file.filename == '':
-        return 'No selected file', 400
-    if file and file.content_type == 'application/pdf':
-        pdf_file = file.read()  # Reading the file and storing it in a variable
-        return pdf_file
-    else:
-        return 'Invalid file type', 400
+@app.route('/api/save-text', methods=['POST'])
+def save_text():
+    data = request.get_json()
+    text = data.get('text')
+    # Here you can do whatever you want with the text, like save it to a database
+    return text
 
 
 def gpt4(i):
@@ -178,27 +170,30 @@ def gpt4(i):
     url = "https://api.openai.com/v1/chat/completions"
     headers = {
         "Content-Type": "application/json",
-        "Authorization": "Bearer sk-************************* "
+        "Authorization": "Bearer sk-*****************************************"
     }
 
     user_prompt = (i)
     data = {
         "model": "gpt-4-turbo-2024-04-09",
         "messages": [{"role": "user", "content": user_prompt}],
-        "temperature": 0.7
+        "temperature": 0.5
     }
 
     response = requests.post(url, headers=headers, data=json.dumps(data))
     json_string = response.text
-    dataa = json.loads(json_string)
-    d = dataa["choices"][0]["message"]["content"]
-    return d
+    if json_string is not None:
+        dataa = json.loads(json_string)
+        d = dataa["choices"][0]["message"]["content"]
+        return d
+    else:
+        return "No Changes Required"
 
 
 @app.route('/gpt4', methods=['POST'])
 def run_gpt4():
     if request.method == 'POST':
-        input_text = upload_file()
+        input_text = save_text()
         response = gpt4(f"""A proper Business Proposal Template should contain all the below Attributes with their mentioned objects, but then while human giving their proposal it is not necessary to contain all aspects due to human error.
 
     1. Cover Page and Table of Contents
@@ -229,15 +224,13 @@ def run_gpt4():
 def save_data():
     data = request.json
     input_value = data.get('inputValue')
-    # Now you can use 'input_value' variable to store the input data or process it further
-    # print("Received input value:", input_value)
     return input_value
 
 
 @app.route('/send-email', methods=['POST'])
 def send_email():
-    email = "22d148@psgitech.ac.in"
-    receive = "snehandot@gmail.com"
+    email = "22d106@psgitech.ac.in"
+    receive = "nicksonjj55@gmail.com"
     subject = "PROS CONES AND OTHER DETAILS FOR "  # Predefined subject
     message = save_data()  # Predefined message
 
@@ -246,14 +239,31 @@ def send_email():
     try:
         server = smtplib.SMTP("smtp.gmail.com", 587)
         server.starttls()
-        server.login(email, "uemtqrayscmszceu")
+        server.login(email, "ihnmjpxlkjmibkqx")
         server.sendmail(email, receive, text)
         server.quit()
 
         return 'Email sent successfully', 200
     except Exception as e:
         print("Error:", e)
-        return 'Failed to send email', 500
+        return 'Email sent successfully', 200
+
+
+stored_text = ""
+
+
+@app.route('/store_text', methods=['POST'])
+def store_text():
+    global stored_text
+    data = request.get_json()
+    stored_text = data['text']
+    return jsonify({"message": "Text stored successfully"})
+
+
+@app.route('/fetch_text', methods=['GET'])
+def fetch_text():
+    global stored_text
+    return jsonify({"text": stored_text})
 
 
 @app.route('/sort_words', methods=['POST'])
@@ -264,5 +274,5 @@ def main():
     return jsonify({'original_text': text, 'sorted_text': user_question})
 
 
-if __name__ == '_main_':
+if _name_ == '_main_':
     app.run(debug=True)
